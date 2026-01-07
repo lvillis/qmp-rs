@@ -48,8 +48,7 @@ async fn ops_policy_blocks_disallowed_commands() -> qmp::Result<()> {
     let err = ops
         .call_json::<()>("stop", None, Default::default())
         .await
-        .err()
-        .expect("must error");
+        .expect_err("must error");
     assert_eq!(err.kind(), qmp::error::ErrorKind::Policy);
 
     server.shutdown().await;
