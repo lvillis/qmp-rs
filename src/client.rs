@@ -397,7 +397,7 @@ impl Client {
                     match serde_json::from_value::<EventMessage>(msg) {
                         Ok(ev) => {
                             #[cfg(feature = "tracing")]
-                            tracing::trace!(event = %ev.event, "received QMP event");
+                            tracing::trace!(event = %ev.name, "received QMP event");
                             let _ = inner.events_tx.send(Event::from(ev));
                         }
                         Err(_e) => {
