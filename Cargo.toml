@@ -11,6 +11,14 @@ repository = "https://github.com/lvillis/qmp-rs"
 homepage = "https://github.com/lvillis/qmp-rs"
 keywords = ["qemu", "qmp", "proxmox", "pve"]
 categories = ["asynchronous", "network-programming"]
+include = [
+  "Cargo.toml",
+  "README.md",
+  "LICENSE",
+  "src/**",
+  "examples/**",
+  "tests/**",
+]
 
 [workspace]
 members = ["."]
