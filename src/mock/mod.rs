@@ -34,7 +34,12 @@ pub enum MockReply {
     Return(Value),
 
     /// Error response.
-    Error { class: String, desc: String },
+    Error {
+        /// QMP error class.
+        class: String,
+        /// QMP error description.
+        desc: String,
+    },
 }
 
 impl MockReply {
@@ -337,14 +342,21 @@ async fn recv_json<R: tokio::io::AsyncBufRead + Unpin>(r: &mut R) -> Result<Valu
 #[serde(tag = "dir", rename_all = "lowercase")]
 pub enum TranscriptStep {
     /// A message sent by the server.
-    Server { msg: Value },
+    Server {
+        /// Message payload.
+        msg: Value,
+    },
     /// A message expected from the client.
-    Client { msg: Value },
+    Client {
+        /// Message payload.
+        msg: Value,
+    },
 }
 
 /// A JSONL transcript, suitable for replay.
 #[derive(Debug, Clone, Default)]
 pub struct Transcript {
+    /// Ordered transcript steps.
     pub steps: Vec<TranscriptStep>,
 }
 
